@@ -102,9 +102,9 @@ jobs:
            
       - name: Download iOS SDK
         run: |
-          git clone --quiet --depth=1 -n --filter=tree:0 https://github.com/Tonwalter888/iOS-SDKs.git
+          git clone --quiet --depth=1 -n --filter=tree:0 https://github.com/xybp888/iOS-SDKs.git
           cd iOS-SDKs
-          git sparse-checkout set --no-cone iPhoneOS18.6.sdk
+          git sparse-checkout set --no-cone iPhoneOS26.2.sdk
           git checkout
           mv *.sdk $THEOS/sdks
 
@@ -136,16 +136,13 @@ jobs:
         run: git clone --quiet --depth=1 https://github.com/PoomSmart/PSHeader.git $THEOS/include/PSHeader
 
       - name: Clone YouPiP
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouPiP.git
+        run: git clone --quiet --depth=1 https://github.com/Tonwalter888/YouPiP.git
     
       - name: Clone YTUHD
         run: git clone --quiet --depth=1 https://github.com/Tonwalter888/YTUHD.git
            
-      - name: Clone Return-YouTube-Dislikes
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/Return-YouTube-Dislikes.git
-
       - name: Clone YouGroupSettings
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouGroupSettings.git
+        run: git clone --quiet --depth=1 https://github.com/Tonwalter888/YouGroupSettings.git
            
       - name: Clone YTVideoOverlay
         run: git clone --quiet --depth=1 https://github.com/PoomSmart/YTVideoOverlay.git
@@ -156,46 +153,9 @@ jobs:
       - name: Clone YouQuality
         run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouQuality.git
 
-      - name: Clone YouSpeed
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouSpeed.git
-
-      - name: Clone DontEatMyContent
-        if: ${{ inputs.demc }}
-        run: git clone --quiet --depth=1 https://github.com/therealFoxster/DontEatMyContent.git
-
-      - name: Clone YouMute
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouMute.git
-    
       - name: Clone YouLoop
         run: git clone --quiet --depth=1 https://github.com/Tonwalter888/YouLoop.git
 
-      - name: Clone Alderis
-        run: git clone --quiet --depth=1 https://github.com/hbang/Alderis.git
-
-      - name: Clone YouSlider
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouSlider.git
-
-      - name: Clone YouChooseQuality
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouChooseQuality.git
-
-      - name: Clone YTSilentVote
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YTSilentVote.git
-
-      - name: Clone YouShare
-        run: git clone --quiet --depth=1 https://github.com/Tonwalter888/YouShare.git
-
-      - name: Clone Gonerino
-        run: git clone --quiet --depth=1 https://github.com/castdrian/Gonerino.git
-
-      - name: Clone YTweaks
-        run: git clone --quiet --depth=1 https://github.com/fosterbarnes/YTweaks.git
-
-      - name: Clone YouGetCaption
-        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouGetCaption.git
-        
-      - name: Clone YTFlags
-        run: git clone --quiet --depth=1 https://github.com/Tonwalter888/YTFlags.git
-        
       - name: Build YouPiP
         run: |
           cd YouPiP
@@ -207,12 +167,6 @@ jobs:
           cd YTUHD
           make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
           mv packages/*.deb ${{ github.workspace }}/ytuhd.deb
-
-      - name: Build Return-YouTube-Dislikes
-        run: |
-          cd Return-YouTube-Dislikes
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/ryd.deb
 
       - name: Build YouGroupSettings
         run: |
@@ -238,94 +192,14 @@ jobs:
           make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
           mv packages/*.deb ${{ github.workspace }}/youquality.deb
 
-      - name: Build YouSpeed
-        run: |
-          cd YouSpeed
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/youspeed.deb
-
-      - name: Build DontEatMyContent
-        if: ${{ inputs.demc }}
-        run: |
-          cd DontEatMyContent
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/demc.deb
-
-      - name: Build YouMute
-        run: |
-          cd YouMute
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/ym.deb 
-
-      - name: Build YTABGoodies
-        run: |
-          cd YTABGoodies
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/ytgoodab.deb
-
       - name: Build YouLoop
         run: |
           cd YouLoop
           make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
           mv packages/*.deb ${{ github.workspace }}/youloop.deb
-
-      - name: Build YouSlider
-        run: |
-          cd YouSlider
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/youslider.deb
-
-      - name: Build Alderis
-        run: |
-          cd Alderis
-          make clean package DEBUG=0 FINALPACKAGE=1
-          mv packages/*.deb ${{ github.workspace }}/alderis.deb
-
-      - name: Build YouChooseQuality
-        run: |
-          cd YouChooseQuality
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/youchoose.deb
-
-      - name: Build YTSilentVote
-        run: |
-          cd YTSilentVote
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/ytnovote.deb  
-
-      - name: Build YouShare
-        run: |
-          cd YouShare
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/youshare.deb
-          
-      - name: Build Gonerino
-        run: |
-          cd Gonerino
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/gonerino.deb
-
-      - name: Build YouGetCaption
-        run: |
-          cd YouGetCaption
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/ygc.deb
-
-      - name: Build YTweaks
-        run: |
-          cd YTweaks
-          make clean package DEBUG=0 FINALPACKAGE=1 ROOTLESS=1
-          mv packages/*.deb ${{ github.workspace }}/ytweaks.deb
-
-      - name: Build YTFlags
-        run: |
-          cd YTFlags
-          make clean package DEBUG=0 FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          mv packages/*.deb ${{ github.workspace }}/ytflags.deb
           
       - name: Inject Tweaks Into IPA
         run: |
-          tweaks="OpenYouTubeSafariExtension.appex"
 
           for f in *.deb; do
             if [ -f "$f" ]; then
